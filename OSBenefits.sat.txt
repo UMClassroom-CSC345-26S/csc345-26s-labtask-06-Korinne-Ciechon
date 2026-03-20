@@ -1,0 +1,180 @@
+OSBenefits.sat
+
+%------------------------------------------------------------------------------
+% File     : Vampire-SAT---5.0
+% Problem  : SOT_IfTagM : v?.?.?
+% Transfm  : none
+% Format   : tptp:raw
+% Command  : run_vampire %s %d SAT
+
+% Computer : quoll
+% Model    : x86_64 x86_64
+% CPU      : Intel(R) Xeon(R) CPU E5-4610 0 @ 2.40GHz
+% Memory   : 128831MB
+% OS       : Linux 6.8.0-90-generic
+% CPULimit : 60s
+% WCLimit  : 0s
+% DateTime : Wed Mar 18 17:52:42 UTC 2026
+
+% Result   : Satisfiable 0.01s 0.11s
+% Output   : FiniteModel 0.01s
+% Verified : 
+% SZS Type : ERROR: Analysing output (MakeTreeStats fails)
+
+% Comments : 
+%------------------------------------------------------------------------------
+tff('declare_$i1',type,
+    'fmb_$i_1': $i ).
+
+tff('finite_domain_$i',axiom,
+    ! [X: $i] : ( X = 'fmb_$i_1' ) ).
+
+tff(declare_system,type,
+    system: $tType ).
+
+tff(declare_system1,type,
+    fmb_system_1: system ).
+
+tff(declare_system2,type,
+    fmb_system_2: system ).
+
+tff(declare_system3,type,
+    fmb_system_3: system ).
+
+tff(finite_domain_system,axiom,
+    ! [X: system] :
+      ( ( X = fmb_system_1 )
+      | ( X = fmb_system_2 )
+      | ( X = fmb_system_3 ) ) ).
+
+tff(distinct_domain_system,axiom,
+    ( ( fmb_system_1 != fmb_system_2 )
+    & ( fmb_system_1 != fmb_system_3 )
+    & ( fmb_system_2 != fmb_system_3 ) ) ).
+
+tff(declare_origin,type,
+    origin: $tType ).
+
+tff(declare_origin1,type,
+    fmb_origin_1: origin ).
+
+tff(declare_origin2,type,
+    fmb_origin_2: origin ).
+
+tff(finite_domain_origin,axiom,
+    ! [X: origin] :
+      ( ( X = fmb_origin_1 )
+      | ( X = fmb_origin_2 ) ) ).
+
+tff(distinct_domain_origin,axiom,
+    fmb_origin_1 != fmb_origin_2 ).
+
+tff(declare_computer,type,
+    computer: $tType ).
+
+tff(declare_computer1,type,
+    fmb_computer_1: computer ).
+
+tff(finite_domain_computer,axiom,
+    ! [X: computer] : ( X = fmb_computer_1 ) ).
+
+tff(declare_linux,type,
+    linux: system ).
+
+tff(linux_definition,axiom,
+    linux = fmb_system_1 ).
+
+tff(declare_windows,type,
+    windows: system ).
+
+tff(windows_definition,axiom,
+    windows = fmb_system_2 ).
+
+tff(declare_osx,type,
+    osx: system ).
+
+tff(osx_definition,axiom,
+    osx = fmb_system_3 ).
+
+tff(declare_unix,type,
+    unix: origin ).
+
+tff(unix_definition,axiom,
+    unix = fmb_origin_1 ).
+
+tff(declare_dos,type,
+    dos: origin ).
+
+tff(dos_definition,axiom,
+    dos = fmb_origin_2 ).
+
+tff(declare_my_computer,type,
+    my_computer: computer ).
+
+tff(my_computer_definition,axiom,
+    my_computer = fmb_computer_1 ).
+
+tff(declare_is_origin,type,
+    is_origin: ( system * origin ) > $o ).
+
+tff(predicate_is_origin,axiom,
+    ( is_origin(fmb_system_1,fmb_origin_1)
+    & is_origin(fmb_system_1,fmb_origin_2)
+    & is_origin(fmb_system_2,fmb_origin_1)
+    & is_origin(fmb_system_2,fmb_origin_2)
+    & is_origin(fmb_system_3,fmb_origin_1)
+    & is_origin(fmb_system_3,fmb_origin_2) ) ).
+
+tff(declare_runs,type,
+    runs: ( computer * system ) > $o ).
+
+tff(predicate_runs,axiom,
+    ( runs(fmb_computer_1,fmb_system_1)
+    & runs(fmb_computer_1,fmb_system_2)
+    & runs(fmb_computer_1,fmb_system_3) ) ).
+
+tff(declare_benefits,type,
+    benefits: ( computer * origin ) > $o ).
+
+tff(predicate_benefits,axiom,
+    ( benefits(fmb_computer_1,fmb_origin_1)
+    & benefits(fmb_computer_1,fmb_origin_2) ) ).
+
+
+%------------------------------------------------------------------------------
+%----ORIGINAL SYSTEM OUTPUT
+% Running first-order model finding
+% Running: /home/tptp/Systems/Vampire-SAT---5.0/vampire --mode casc --intent sat -m 16384 --cores 7 -t 60 /tmp/qJeqcgyAgl/SOT_IfTagM
+% % (2782871)Running in auto input_syntax mode. Trying TPTP
+% % (2782871)Will run a generic schedule for satisfiability detection.
+% % (2782877)% WARNING: option uhcvi not known.
+% % (2782881)ott+1_1_to=lpo:sil=16000:sp=reverse_arity:erd=off:random_seed=840117132:i=131_1 on SOT_IfTagM for (1ds/131Mi)
+% % (2782877)dis+11_61:31_drc=ordering:lsd=5:bsr=unit_only:rp=on:newcnf=on:random_seed=2389960752:i=135531:add=off:rawr=on_599 on SOT_IfTagM for (599ds/135531Mi)
+% % (2782878)dis+10_161_sil=256000:plsq=on:plsqr=61199697,1048576:gs=on:alpa=true:sac=on:slsq=on:cn=on:random_seed=1232774946:i=88024:add=on:rawr=on_441 on SOT_IfTagM for (441ds/88024Mi)
+% % (2782882)ott-3_16_to=lpo:sil=16000:sp=arity:fd=off:rp=on:random_seed=1520537344:i=159:nicw=on:bs=unit_only:fsr=off:amm=off_1 on SOT_IfTagM for (1ds/159Mi)
+% % (2782879)dis+10_1_sil=32000:sp=arity:random_seed=2827435824:i=103:fgj=on_1 on SOT_IfTagM for (1ds/103Mi)
+% % (2782876)fmb+10_1_sas=cadical:bce=on:rp=on:random_seed=1899732603_599 on SOT_IfTagM for (599ds/0Mi)
+% % (2782880)ott+31_1_sil=16000:lcm=predicate:bce=on:newcnf=on:random_seed=2727359528:i=116_1 on SOT_IfTagM for (1ds/116Mi)
+% % Detected minimum model sizes of [3,1]
+% % Detected maximum model sizes of [3,2]
+% % TRYING [3,1]
+% % TRYING [3,2]
+% % Finite Model Found!
+% % SZS status Satisfiable for SOT_IfTagM
+% % (2782876)First to succeed.
+% % (2782876)Solution written to "/tmp/tmp.EdLu4uHmmy/vampire-proof-2782871"
+% % SZS output start FiniteModel for SOT_IfTagM
+% See solution above
+% % (2782876)------------------------------
+% % (2782876)Version: Vampire 5.0.1 (commit 44a2ec420 on 2026-02-23 17:05:19 +0100)
+% % (2782876)Linked with Z3 4.14.0.0 3c47fd96cf5645d0c42b2c819d9e9a84380aa721 z3-4.8.4-9178-g3c47fd96c
+% % (2782876)CaDiCaL version: 2.1.3-f13d744
+% % (2782876)Termination reason: Satisfiable
+% % (2782876)Time elapsed: 0.003 s
+% % (2782876)Peak memory usage: 11 MB
+% % (2782876)------------------------------
+% % (2782876)------------------------------
+% % (2782871)Success in time 0.08 s
+% % Vampire exiting
+% 
+%------------------------------------------------------------------------------
